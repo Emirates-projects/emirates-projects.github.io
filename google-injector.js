@@ -169,5 +169,61 @@
             localStorage.setItem('cookieConsent', 'accepted');
         };
     })();
+    /* 
+    ####################################################################
+    ####################################################################
+          🇦🇪🇦🇪🇦🇪     هوية الشركة المحلية (Schema SEO)     🇦🇪🇦🇪🇦🇪
+           تجعل جوجل يفهم أن النشاط في الإمارات لتعزيز الظهور المحلي
+    ####################################################################
+    */
+
+    (function injectEmiratesSchema() {
+        const schemaData = {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness", 
+            "name": "ديجيتال برو لحلول الأعمال الرقمية",
+            "image": "https://emirates-projects.github.io/images/tax-card.jpg",
+            "@id": "https://emirates-projects.github.io",
+            "url": "https://emirates-projects.github.io",
+            "telephone": "+201110760081",
+            "priceRange": "$$",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Business Bay",
+                "addressLocality": "Dubai",
+                "addressRegion": "Dubai",
+                "postalCode": "00000",
+                "addressCountry": "AE"  // رمز الإمارات هو الأهم هنا
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 25.185623,  // إحداثيات تقريبية في دبي (الخليج التجاري)
+                "longitude": 55.267323
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "United Arab Emirates" // نخدم الإمارات بالكامل
+            },
+            "sameAs": [
+                "https://wa.me/201110760081"
+                // ضع هنا روابط السوشيال ميديا الخاصة بكم إن وجدت
+            ],
+            "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+                ],
+                "opens": "09:00",
+                "closes": "22:00"
+            },
+            "currenciesAccepted": "AED" // العملة المقبولة: درهم إماراتي
+        };
+
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.text = JSON.stringify(schemaData);
+        document.head.appendChild(script);
+        console.log("✅ تم تفعيل الهوية الإماراتية (Schema AE)");
+    })();
 
 })();
