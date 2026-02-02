@@ -73,5 +73,101 @@
 
     // تنفيذ المنطقة الثانية
     if(extraCode.trim().length > 10) injectCode(extraCode);
+    /* 
+    ####################################################################
+    ####################################################################
+          🍪🍪🍪      إعدادات نافذة الكوكيز (Cookie Consent)     🍪🍪🍪
+    ####################################################################
+    */
+
+    (function createCookiePopup() {
+        // التحقق مما إذا كان المستخدم قد وافق مسبقاً
+        if (localStorage.getItem('cookieConsent') === 'accepted') return;
+
+        // 1. إنشاء تصميم النافذة (CSS)
+        const style = document.createElement('style');
+        style.textContent = `
+            #cookie-popup {
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                background: #fff;
+                color: #333;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                z-index: 9999;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                font-family: 'Tajawal', sans-serif;
+                border: 1px solid #e5e7eb;
+                direction: rtl;
+            }
+            @media (min-width: 768px) {
+                #cookie-popup {
+                    flex-direction: row;
+                    justify-content: space-between;
+                    text-align: right;
+                    max-width: 900px;
+                    margin: 0 auto;
+                }
+            }
+            .cookie-content {
+                margin-bottom: 15px;
+            }
+            @media (min-width: 768px) {
+                .cookie-content { margin-bottom: 0; margin-left: 20px; }
+            }
+            .cookie-content h4 {
+                margin: 0 0 5px;
+                font-weight: bold;
+                color: #1e3a8a;
+            }
+            .cookie-content p {
+                margin: 0;
+                font-size: 14px;
+                color: #4b5563;
+                line-height: 1.5;
+            }
+            .cookie-btn {
+                background: #2563eb;
+                color: white;
+                border: none;
+                padding: 10px 25px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+                white-space: nowrap;
+            }
+            .cookie-btn:hover {
+                background: #1d4ed8;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 2. إنشاء عناصر النافذة (HTML)
+        const popup = document.createElement('div');
+        popup.id = 'cookie-popup';
+        popup.innerHTML = `
+            <div class="cookie-content">
+                <h4>🍪 نحن نحترم خصوصيتك</h4>
+                <p>نستخدم ملفات تعريف الارتباط (Cookies) لتحسين تجربتك على موقعنا وتحليل الزيارات وتقديم محتوى مخصص. بمتابعة التصفح، فإنك توافق على استخدامنا لهذه الملفات.</p>
+            </div>
+            <button id="accept-cookies" class="cookie-btn">موافق، أكمل التصفح</button>
+        `;
+        document.body.appendChild(popup);
+
+        // 3. برمجة زر الموافقة
+        document.getElementById('accept-cookies').onclick = function() {
+            // إخفاء النافذة
+            popup.style.display = 'none';
+            // حفظ الموافقة في المتصفح حتى لا تظهر مرة أخرى
+            localStorage.setItem('cookieConsent', 'accepted');
+        };
+    })();
 
 })();
