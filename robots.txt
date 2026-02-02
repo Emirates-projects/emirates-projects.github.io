@@ -27,3 +27,4 @@ Allow: /
 
 # Sitemap Location
 Sitemap: https://emirates-projects.github.io/sitemap.xml
+
