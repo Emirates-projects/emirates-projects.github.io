@@ -1,0 +1,29 @@
+# Allow all standard crawlers
+User-agent: *
+Allow: /
+
+# Explicitly Allow OpenAI (ChatGPT)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Explicitly Allow Google AI (Gemini/Bard)
+User-agent: Google-Extended
+Allow: /
+
+# Explicitly Allow Common Crawl (Used by many LLMs)
+User-agent: CCBot
+Allow: /
+
+# Explicitly Allow Anthropic (Claude)
+User-agent: anthropic-ai
+Allow: /
+
+# Explicitly Allow Meta (Facebook AI)
+User-agent: FacebookBot
+Allow: /
+
+# Sitemap Location
+Sitemap: https://emirates-projects.github.io/sitemap.xml
