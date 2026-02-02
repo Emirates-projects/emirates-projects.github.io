@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- الصفحة الرئيسية -->
+  <url>
+    <loc>https://emirates-projects.github.io/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- صفحة إثبات الملكية لجوجل (مهمة للأرشفة) -->
+  <url>
+    <loc>https://emirates-projects.github.io/googlebc9e4ce613a7dadd.html</loc>
+    <lastmod>2023-10-27</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- يمكنك إضافة أي صفحات جديدة مستقبلاً هنا بنفس التنسيق -->
+</urlset>
