@@ -1,35 +1,60 @@
 import os
+import time
+from datetime import datetime
 
-# اسم السكربت الذي نريد زراعته
-script_tag = '<script src="google-injector.js"></script>'
+# ==========================================
+# إعدادات المراقب
+# ==========================================
+SCRIPT_TAG = '<script src="google-injector.js"></script>'
+CHECK_INTERVAL = 3  # الفحص كل 3 ثواني
 
-# تحديد المسار الحالي
-current_directory = os.getcwd()
+def inject_script_if_missing():
+    current_directory = os.getcwd()
+    changes_made = False
 
-print("--- بدء عملية تحديث الصفحات ---")
-
-# البحث في جميع الملفات والمجلدات
-for root, dirs, files in os.walk(current_directory):
-    for file in files:
-        if file.endswith(".html"):
-            file_path = os.path.join(root, file)
-            
-            with open(file_path, "r", encoding="utf-8") as f:
-                content = f.read()
-            
-            # التحقق مما إذا كان السطر موجوداً مسبقاً
-            if "google-injector.js" in content:
-                print(f"✅ موجود بالفعل: {file}")
-            else:
-                # البحث عن وسم الإغلاق body
-                if "</body>" in content:
-                    # إضافة السكربت قبل إغلاق الـ body
-                    new_content = content.replace("</body>", f"{script_tag}\n</body>")
+    # المرور على جميع الملفات
+    for root, dirs, files in os.walk(current_directory):
+        for file in files:
+            if file.endswith(".html"):
+                file_path = os.path.join(root, file)
+                
+                try:
+                    with open(file_path, "r", encoding="utf-8") as f:
+                        content = f.read()
                     
-                    with open(file_path, "w", encoding="utf-8") as f:
-                        f.write(new_content)
-                    print(f"🔥 تم التحديث بنجاح: {file}")
-                else:
-                    print(f"⚠️ تخطي (لا يوجد وسم body): {file}")
+                    # التحقق: هل السكربت موجود؟ وهل وسم body موجود؟
+                    if SCRIPT_TAG not in content and "</body>" in content:
+                        print(f"⚡ تم اكتشاف ملف جديد/معدل: {file}")
+                        
+                        # إضافة السكربت
+                        new_content = content.replace("</body>", f"{SCRIPT_TAG}\n</body>")
+                        
+                        with open(file_path, "w", encoding="utf-8") as f:
+                            f.write(new_content)
+                        
+                        print(f"✅ تم الحقن بنجاح في: {file}")
+                        changes_made = True
+                
+                except Exception as e:
+                    print(f"خطأ في قراءة الملف {file}: {e}")
 
-print("--- انتهت العملية ---")
+    return changes_made
+
+# ==========================================
+# حلقة المراقبة المستمرة
+# ==========================================
+print("--- 👁️  بدء نظام المراقبة الآلي ---")
+print("سيتم فحص الملفات كل 3 ثوانٍ... (لا تغلق هذه النافذة)")
+print("لإيقاف البرنامج اضغط: Ctrl + C")
+print("-" * 40)
+
+try:
+    while True:
+        # تشغيل دالة الفحص
+        inject_script_if_missing()
+        
+        # الانتظار قبل الفحص التالي
+        time.sleep(CHECK_INTERVAL)
+
+except KeyboardInterrupt:
+    print("\n🛑 تم إيقاف المراقب بنجاح.")
