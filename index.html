@@ -2,178 +2,223 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حلول رقمية متكاملة | مشاريع الإمارات</title>
-    <!-- خط تجوال من جوجل -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- مكتبة Tailwind CSS للتصميم -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مشاريع الإمارات | حلول رقمية متكاملة</title>
+    <!-- استدعاء خط تجوال -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- تايلويند CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- مكتبة FontAwesome للأيقونات -->
+    <!-- أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a', // أزرق داكن
+                        secondary: '#f59e0b', // ذهبي
+                    },
+                    fontFamily: {
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
         }
+    </script>
+
+    <style>
+        body { font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
+        
+        /* تحسينات البانر للموبايل */
+        .hero-section {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://emirates-projects.github.io/images/مشاريع%20الامارات.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll; /* أفضل للموبايل من fixed */
+            height: 85vh; /* تغطية 85% من ارتفاع شاشة الموبايل */
+            position: relative;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-section {
+                height: 100vh; /* شاشة كاملة للكمبيوتر */
+                background-attachment: fixed; /* تثبيت الخلفية جمالي للكمبيوتر */
+            }
+        }
+
         .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             background-color: #25d366;
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            z-index: 100;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
-            transition: transform 0.3s;
+            font-size: 28px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            background-color: #20ba5a;
-        }
-        .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1512453979798-5ea932a88406?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-        }
+        .whatsapp-float:active { transform: scale(0.9); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50 text-gray-800 antialiased">
 
-    <!-- القائمة العلوية -->
-    <nav class="bg-white shadow-md fixed w-full z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-blue-600">ديجيتال برو</a>
-            <div class="hidden md:flex space-x-8 space-x-reverse">
-                <a href="#home" class="text-gray-700 hover:text-blue-600 transition">الرئيسية</a>
-                <a href="#services" class="text-gray-700 hover:text-blue-600 transition">خدماتنا</a>
-                <a href="#about" class="text-gray-700 hover:text-blue-600 transition">من نحن</a>
-                <a href="#legal" class="text-gray-700 hover:text-blue-600 transition">الكيان القانوني</a>
+    <!-- نافذة تحميل (اختياري) -->
+    <!-- القائمة العلوية للموبايل -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-sm fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-extrabold text-primary tracking-wide">مشاريع الإمارات</a>
+            
+            <!-- زر القائمة للموبايل -->
+            <button id="menu-btn" class="md:hidden text-gray-700 text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- روابط الكمبيوتر -->
+            <div class="hidden md:flex space-x-6 space-x-reverse text-sm font-bold">
+                <a href="#home" class="hover:text-secondary transition">الرئيسية</a>
+                <a href="#services" class="hover:text-secondary transition">خدماتنا</a>
+                <a href="#about" class="hover:text-secondary transition">عن الشركة</a>
+                <a href="#contact" class="bg-primary text-white px-5 py-2 rounded-full hover:bg-blue-800 transition">تواصل معنا</a>
+            </div>
+        </div>
+
+        <!-- قائمة الموبايل المنسدلة -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0">
+            <div class="flex flex-col p-4 space-y-3 font-semibold text-center">
+                <a href="#home" class="py-2 hover:bg-gray-50 rounded-lg text-primary">الرئيسية</a>
+                <a href="#services" class="py-2 hover:bg-gray-50 rounded-lg text-gray-700">خدماتنا</a>
+                <a href="#about" class="py-2 hover:bg-gray-50 rounded-lg text-gray-700">عن الشركة</a>
+                <a href="https://wa.me/201110760081" class="py-3 bg-green-500 text-white rounded-xl mt-2">
+                    <i class="fab fa-whatsapp ml-2"></i> تواصل عبر واتساب
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- القسم الرئيسي -->
-    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center text-white pt-16">
-        <div class="px-6">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">نحلق بمشروعك في سماء الإمارات</h1>
-            <p class="text-xl md:text-2xl mb-8 text-gray-200">حلول برمجية وتسويقية متكاملة تضعك في المقدمة</p>
-            <a href="https://wa.me/201110760081" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">
-                ابدأ مشروعك الآن
-            </a>
+    <!-- البانر الرئيسي -->
+    <section id="home" class="hero-section flex items-center justify-center text-center text-white px-4">
+        <div class="max-w-3xl animate-fade-in-up">
+            <span class="inline-block bg-secondary text-black text-xs font-bold px-3 py-1 rounded-full mb-4">خدمات متكاملة 2024</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
+                حول فكرتك إلى <span class="text-secondary">واقع رقمي</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-lg mx-auto leading-relaxed">
+                تصميم مواقع، متاجر إلكترونية، وتسويق شامل يستهدف جمهورك في الإمارات بدقة واحترافية.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://wa.me/201110760081" class="bg-secondary text-black font-bold py-3 px-8 rounded-xl shadow-lg hover:bg-yellow-400 transition transform hover:-translate-y-1 w-full sm:w-auto">
+                    احصل على عرض سعر
+                </a>
+                <a href="#services" class="bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold py-3 px-8 rounded-xl hover:bg-white/30 transition w-full sm:w-auto">
+                    استكشف خدماتنا
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- قسم الخدمات -->
-    <section id="services" class="py-20 container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">خدماتنا الاحترافية</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- قسم الخدمات (Grid متجاوب) -->
+    <section id="services" class="py-16 bg-gray-50 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">خدماتنا المميزة</h2>
+                <div class="h-1 w-20 bg-secondary mx-auto rounded-full"></div>
+            </div>
             
-            <!-- متاجر إلكترونية -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition text-center border-t-4 border-blue-500">
-                <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-shopping-cart"></i></div>
-                <h3 class="text-xl font-bold mb-2">متاجر إلكترونية</h3>
-                <p class="text-gray-600">تصميم وبرمجة متاجر إلكترونية متكاملة تدعم الدفع الإلكتروني وتجربة مستخدم سلسة.</p>
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- خدمة 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-primary text-2xl mb-4 group-hover:bg-primary group-hover:text-white transition">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">متاجر إلكترونية</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">انطلق في عالم التجارة الإلكترونية مع متاجر سريعة، آمنة، ومتوافقة مع بوابات الدفع المحلية.</p>
+                </div>
 
-            <!-- صفحات هبوط -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition text-center border-t-4 border-green-500">
-                <div class="text-4xl text-green-500 mb-4"><i class="fas fa-rocket"></i></div>
-                <h3 class="text-xl font-bold mb-2">صفحات هبوط احترافية</h3>
-                <p class="text-gray-600">صفحات مصممة خصيصاً لتحويل الزوار إلى عملاء فعليين بتصاميم جذابة.</p>
-            </div>
+                <!-- خدمة 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center text-green-600 text-2xl mb-4 group-hover:bg-green-600 group-hover:text-white transition">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">تصدر جوجل (SEO)</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">تحسين موقعك للظهور في الصفحات الأولى للباحثين عن خدماتك داخل الإمارات.</p>
+                </div>
 
-            <!-- SEO -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition text-center border-t-4 border-purple-500">
-                <div class="text-4xl text-purple-500 mb-4"><i class="fas fa-search"></i></div>
-                <h3 class="text-xl font-bold mb-2">تحسين محركات البحث (SEO)</h3>
-                <p class="text-gray-600">تصدر نتائج البحث في جوجل واجعل موقعك يظهر لعملائك المستهدفين.</p>
-            </div>
-
-            <!-- مواقع احترافية -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition text-center border-t-4 border-red-500">
-                <div class="text-4xl text-red-500 mb-4"><i class="fas fa-laptop-code"></i></div>
-                <h3 class="text-xl font-bold mb-2">مواقع إلكترونية للشركات</h3>
-                <p class="text-gray-600">مواقع تعريفية للشركات تعكس احترافية أعمالكم وتعزز تواجدكم الرقمي.</p>
-            </div>
-
-            <!-- إعلانات ممولة -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition text-center border-t-4 border-yellow-500 col-span-1 md:col-span-2 lg:col-span-2">
-                <div class="text-4xl text-yellow-500 mb-4"><i class="fas fa-bullhorn"></i></div>
-                <h3 class="text-xl font-bold mb-2">إعلانات ممولة شاملة</h3>
-                <p class="text-gray-600 mb-4">نصلك بجمهورك أينما كانوا عبر استراتيجيات دقيقة.</p>
-                <div class="flex justify-center space-x-4 space-x-reverse text-2xl text-gray-400">
-                    <span title="Google Ads" class="hover:text-blue-500"><i class="fab fa-google"></i></span>
-                    <span title="Meta/Facebook" class="hover:text-blue-700"><i class="fab fa-facebook"></i></span>
-                    <span title="Instagram" class="hover:text-pink-600"><i class="fab fa-instagram"></i></span>
-                    <span title="Snapchat" class="hover:text-yellow-400"><i class="fab fa-snapchat"></i></span>
-                    <span title="TikTok" class="hover:text-black"><i class="fab fa-tiktok"></i></span>
+                <!-- خدمة 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 text-2xl mb-4 group-hover:bg-purple-600 group-hover:text-white transition">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">إعلانات ممولة</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">حملات إعلانية ذكية على سناب شات، تيك توك، انستجرام وجوجل للوصول لعميلك المثالي.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- قسم من نحن -->
-    <section id="about" class="bg-blue-50 py-20">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl font-bold mb-8 text-gray-800">من نحن</h2>
-                <p class="text-lg text-gray-700 leading-relaxed">
-                    نحن وكالة رقمية متخصصة في تقديم الحلول البرمجية والتسويقية المبتكرة. نركز بشكل أساسي على خدمة السوق الإماراتي من خلال تقديم خدمات عالية الجودة تضاهي المعايير العالمية. فريقنا يضم نخبة من المطورين والمسوقين المحترفين الشغوفين بتحويل الأفكار إلى واقع رقمي ناجح، ملتزمون بالدقة في المواعيد والجودة في التنفيذ.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الكيان القانوني -->
-    <section id="legal" class="py-20 container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">الكيان القانوني والتراخيص</h2>
-        <div class="flex flex-col md:flex-row items-center justify-center gap-10 bg-white p-8 rounded-2xl shadow-inner border border-gray-100">
-            
-            <div class="md:w-1/2 text-center md:text-right">
-                <h3 class="text-2xl font-bold mb-4 text-blue-900">مقرنا الرسمي</h3>
-                <p class="text-xl text-gray-700 mb-6">
-                    <i class="fas fa-map-marker-alt text-red-500 ml-2"></i>
-                    جمهورية مصر العربية، مدينة 6 أكتوبر
-                </p>
-                <p class="text-gray-600 leading-relaxed">
-                    نمارس نشاطنا بشكل قانوني ورسمي، مما يضمن حقوق عملائنا ومصداقية تعاملاتنا. نحن مسجلون لدى مصلحة الضرائب المصرية، مما يعكس التزامنا بالشفافية والمهنية في جميع تعاملاتنا التجارية.
-                </p>
-            </div>
-
-            <div class="md:w-1/2">
-                <!-- هنا تم تحديث رابط الصورة -->
-                <div class="relative group">
-                    <img src="https://emirates-projects.github.io/images/tax-card.jpg" alt="البطاقة الضريبية" class="rounded-lg shadow-xl w-full max-w-md mx-auto transform group-hover:scale-105 transition duration-500 border-4 border-gray-200">
-                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 rounded-b-lg opacity-0 group-hover:opacity-100 transition">
-                        وثيقة رسمية معتمدة
+    <!-- قسم عن الشركة + الضريبية -->
+    <section id="about" class="py-16 bg-white px-4">
+        <div class="container mx-auto max-w-5xl">
+            <div class="bg-blue-50 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 shadow-inner">
+                <div class="md:w-1/2 text-center md:text-right">
+                    <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">شركاء نجاحك في الإمارات</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        نحن لسنا مجرد شركة برمجة، بل شريك استراتيجي يساعدك على النمو. نعمل بشكل رسمي وقانوني (مقرنا مصر - 6 أكتوبر) ونخدم مئات العملاء في الخليج.
+                    </p>
+                    <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                        <span class="bg-white px-4 py-2 rounded-lg text-sm font-bold text-gray-700 shadow-sm">🚀 تسليم سريع</span>
+                        <span class="bg-white px-4 py-2 rounded-lg text-sm font-bold text-gray-700 shadow-sm">💯 جودة عالمية</span>
+                        <span class="bg-white px-4 py-2 rounded-lg text-sm font-bold text-gray-700 shadow-sm">📄 عقود رسمية</span>
                     </div>
                 </div>
+                <div class="md:w-1/2 w-full">
+                    <img src="https://emirates-projects.github.io/images/tax-card.jpg" alt="البطاقة الضريبية" class="w-full rounded-xl shadow-lg border-4 border-white transform hover:scale-105 transition duration-500">
+                    <p class="text-center text-xs text-gray-400 mt-2">وثيقة تسجيل ضريبي رسمية</p>
+                </div>
             </div>
-            
         </div>
     </section>
 
     <!-- الفوتر -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2023 جميع الحقوق محفوظة. تم التطوير بشغف.</p>
+    <footer class="bg-gray-900 text-white py-8 text-center px-4">
+        <p class="text-gray-400 text-sm mb-2">&copy; 2024 جميع الحقوق محفوظة لمشاريع الإمارات.</p>
+        <div class="flex justify-center space-x-4 space-x-reverse text-lg">
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-tiktok"></i></a>
         </div>
     </footer>
 
-    <!-- زر الواتساب العائم -->
-    <a href="https://wa.me/201110760081" class="whatsapp-float" target="_blank">
+    <!-- زر واتساب العائم -->
+    <a href="https://wa.me/201110760081" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-<script src="google-injector.js"></script>
+    <!-- سكربت التحكم في القائمة -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // إغلاق القائمة عند الضغط على أي رابط
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+    
+    <!-- استدعاء ملف الخدمات والتحليلات المركزي -->
+    <script src="google-injector.js"></script>
+    
 </body>
 </html>
