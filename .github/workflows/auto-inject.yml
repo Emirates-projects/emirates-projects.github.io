@@ -1,0 +1,77 @@
+name: Auto Inject Google Script
+
+# متى يعمل هذا الروبوت؟ عند عمل Push على الفرع الرئيسي
+on:
+  push:
+    branches:
+      - main
+      - master
+
+# إعطاء صلاحيات للكتابة على الملفات
+permissions:
+  contents: write
+
+jobs:
+  inject-script:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. تحميل ملفات الموقع
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # 2. إعداد بايثون
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    # 3. تشغيل سكربت الحقن
+    - name: Run Injector Script
+      run: |
+        python -c "
+        import os
+
+        # السطر المراد إضافته
+        SCRIPT_TAG = '<script src=\"google-injector.js\"></script>'
+        
+        print('--- Starting Auto Injection ---')
+        changes = False
+
+        # البحث في كل الملفات
+        for root, dirs, files in os.walk('.'):
+            # استثناء مجلد .git
+            if '.git' in root:
+                continue
+                
+            for file in files:
+                if file.endswith('.html'):
+                    file_path = os.path.join(root, file)
+                    
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            content = f.read()
+                        
+                        # إذا كان الكود غير موجود ويوجد وسم إغلاق البودي
+                        if SCRIPT_TAG not in content and '</body>' in content:
+                            print(f'Injecting into: {file}')
+                            new_content = content.replace('</body>', f'{SCRIPT_TAG}\n</body>')
+                            
+                            with open(file_path, 'w', encoding='utf-8') as f:
+                                f.write(new_content)
+                            changes = True
+                    except Exception as e:
+                        print(f'Error reading {file}: {e}')
+        
+        if changes:
+            print('Changes were made.')
+        else:
+            print('No missing scripts found.')
+        "
+
+    # 4. حفظ التغييرات ورفعها للموقع تلقائياً
+    - name: Commit and Push changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "🤖 Auto-injected Google Script into HTML files"
+        branch: ${{ github.ref }}
