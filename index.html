@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مشاريع الإمارات | حلول رقمية متكاملة</title>
-    <!-- استدعاء خط تجوال -->
+    <title>مشاريع الإمارات 2026 | المستقبل الرقمي</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <!-- تايلويند CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -16,8 +13,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1e3a8a', // أزرق داكن
-                        secondary: '#f59e0b', // ذهبي
+                        primary: '#0f172a', // كحلي غامق جداً (رسمي)
+                        accent: '#d97706',  // برتقالي ذهبي
+                        light: '#f8fafc'
                     },
                     fontFamily: {
                         tajawal: ['Tajawal', 'sans-serif'],
@@ -30,195 +28,180 @@
     <style>
         body { font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
         
-        /* تحسينات البانر للموبايل */
-        .hero-section {
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://emirates-projects.github.io/images/مشاريع%20الامارات.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: scroll; /* أفضل للموبايل من fixed */
-            height: 85vh; /* تغطية 85% من ارتفاع شاشة الموبايل */
-            position: relative;
+        /* تحسين مظهر الصورة */
+        .hero-img {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         }
         
         @media (min-width: 768px) {
-            .hero-section {
-                height: 100vh; /* شاشة كاملة للكمبيوتر */
-                background-attachment: fixed; /* تثبيت الخلفية جمالي للكمبيوتر */
+            .hero-img {
+                mask-image: linear-gradient(to left, black 80%, transparent 100%);
+                -webkit-mask-image: linear-gradient(to left, black 80%, transparent 100%);
             }
         }
 
         .whatsapp-float {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
+            bottom: 25px;
+            right: 25px;
+            background: #25d366;
             color: white;
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: all 0.3s ease;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: transform 0.2s;
         }
         .whatsapp-float:active { transform: scale(0.9); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body class="bg-light text-gray-800">
 
-    <!-- نافذة تحميل (اختياري) -->
-    <!-- القائمة العلوية للموبايل -->
-    <nav class="bg-white/95 backdrop-blur-sm shadow-sm fixed w-full z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-xl font-extrabold text-primary tracking-wide">مشاريع الإمارات</a>
+    <!-- نافذة التنقل -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 h-16 flex justify-between items-center">
+            <div class="font-extrabold text-2xl text-primary tracking-tighter">
+                DXB<span class="text-accent">2026</span>
+            </div>
             
-            <!-- زر القائمة للموبايل -->
-            <button id="menu-btn" class="md:hidden text-gray-700 text-2xl focus:outline-none">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <!-- روابط الكمبيوتر -->
-            <div class="hidden md:flex space-x-6 space-x-reverse text-sm font-bold">
-                <a href="#home" class="hover:text-secondary transition">الرئيسية</a>
-                <a href="#services" class="hover:text-secondary transition">خدماتنا</a>
-                <a href="#about" class="hover:text-secondary transition">عن الشركة</a>
-                <a href="#contact" class="bg-primary text-white px-5 py-2 rounded-full hover:bg-blue-800 transition">تواصل معنا</a>
+            <!-- روابط سطح المكتب -->
+            <div class="hidden md:flex space-x-8 space-x-reverse font-bold text-sm text-gray-600">
+                <a href="#home" class="hover:text-primary transition">الرئيسية</a>
+                <a href="#services" class="hover:text-primary transition">خدماتنا</a>
+                <a href="#contact" class="bg-primary text-white px-5 py-2 rounded-lg hover:bg-slate-800 transition">ابدأ مشروعك</a>
             </div>
+
+            <!-- زر موبايل -->
+            <button id="menu-btn" class="md:hidden text-2xl text-primary"><i class="fas fa-bars"></i></button>
         </div>
-
-        <!-- قائمة الموبايل المنسدلة -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0">
-            <div class="flex flex-col p-4 space-y-3 font-semibold text-center">
-                <a href="#home" class="py-2 hover:bg-gray-50 rounded-lg text-primary">الرئيسية</a>
-                <a href="#services" class="py-2 hover:bg-gray-50 rounded-lg text-gray-700">خدماتنا</a>
-                <a href="#about" class="py-2 hover:bg-gray-50 rounded-lg text-gray-700">عن الشركة</a>
-                <a href="https://wa.me/201110760081" class="py-3 bg-green-500 text-white rounded-xl mt-2">
-                    <i class="fab fa-whatsapp ml-2"></i> تواصل عبر واتساب
-                </a>
-            </div>
+        
+        <!-- قائمة الموبايل -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 absolute w-full shadow-lg">
+            <a href="#home" class="block py-3 text-primary font-bold border-b border-gray-100">الرئيسية</a>
+            <a href="#services" class="block py-3 text-gray-600 font-bold border-b border-gray-100">الخدمات</a>
+            <a href="https://wa.me/201110760081" class="block py-3 text-accent font-bold">تواصل معنا</a>
         </div>
     </nav>
 
-    <!-- البانر الرئيسي -->
-    <section id="home" class="hero-section flex items-center justify-center text-center text-white px-4">
-        <div class="max-w-3xl animate-fade-in-up">
-            <span class="inline-block bg-secondary text-black text-xs font-bold px-3 py-1 rounded-full mb-4">خدمات متكاملة 2024</span>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
-                حول فكرتك إلى <span class="text-secondary">واقع رقمي</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-lg mx-auto leading-relaxed">
-                تصميم مواقع، متاجر إلكترونية، وتسويق شامل يستهدف جمهورك في الإمارات بدقة واحترافية.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://wa.me/201110760081" class="bg-secondary text-black font-bold py-3 px-8 rounded-xl shadow-lg hover:bg-yellow-400 transition transform hover:-translate-y-1 w-full sm:w-auto">
-                    احصل على عرض سعر
-                </a>
-                <a href="#services" class="bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold py-3 px-8 rounded-xl hover:bg-white/30 transition w-full sm:w-auto">
-                    استكشف خدماتنا
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الخدمات (Grid متجاوب) -->
-    <section id="services" class="py-16 bg-gray-50 px-4">
-        <div class="container mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-2">خدماتنا المميزة</h2>
-                <div class="h-1 w-20 bg-secondary mx-auto rounded-full"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- خدمة 1 -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group">
-                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-primary text-2xl mb-4 group-hover:bg-primary group-hover:text-white transition">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">متاجر إلكترونية</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">انطلق في عالم التجارة الإلكترونية مع متاجر سريعة، آمنة، ومتوافقة مع بوابات الدفع المحلية.</p>
-                </div>
-
-                <!-- خدمة 2 -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group">
-                    <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center text-green-600 text-2xl mb-4 group-hover:bg-green-600 group-hover:text-white transition">
-                        <i class="fas fa-search-dollar"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">تصدر جوجل (SEO)</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">تحسين موقعك للظهور في الصفحات الأولى للباحثين عن خدماتك داخل الإمارات.</p>
-                </div>
-
-                <!-- خدمة 3 -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group">
-                    <div class="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 text-2xl mb-4 group-hover:bg-purple-600 group-hover:text-white transition">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">إعلانات ممولة</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">حملات إعلانية ذكية على سناب شات، تيك توك، انستجرام وجوجل للوصول لعميلك المثالي.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم عن الشركة + الضريبية -->
-    <section id="about" class="py-16 bg-white px-4">
-        <div class="container mx-auto max-w-5xl">
-            <div class="bg-blue-50 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 shadow-inner">
-                <div class="md:w-1/2 text-center md:text-right">
-                    <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">شركاء نجاحك في الإمارات</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        نحن لسنا مجرد شركة برمجة، بل شريك استراتيجي يساعدك على النمو. نعمل بشكل رسمي وقانوني (مقرنا مصر - 6 أكتوبر) ونخدم مئات العملاء في الخليج.
+    <!-- الهيرو سكشن (مفصول: صورة ونص) -->
+    <section id="home" class="relative bg-white overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col-reverse md:flex-row items-center py-12 md:py-24 gap-10">
+                
+                <!-- المحتوى النصي -->
+                <div class="w-full md:w-1/2 text-center md:text-right z-10">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold mb-4 border border-blue-100">
+                        ✨ رؤية 2026 الرقمية
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-primary mb-6 leading-tight">
+                        شريكك التقني الأول في <span class="text-accent">الإمارات</span>
+                    </h1>
+                    <p class="text-lg text-gray-500 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
+                        نقدم حلولاً برمجية وتسويقية تسبق الزمن. من دبي إلى العالم، نبني متاجر وتطبيقات تليق بمستقبل 2026.
                     </p>
-                    <div class="flex flex-wrap gap-3 justify-center md:justify-start">
-                        <span class="bg-white px-4 py-2 rounded-lg text-sm font-bold text-gray-700 shadow-sm">🚀 تسليم سريع</span>
-                        <span class="bg-white px-4 py-2 rounded-lg text-sm font-bold text-gray-700 shadow-sm">💯 جودة عالمية</span>
-                        <span class="bg-white px-4 py-2 rounded-lg text-sm font-bold text-gray-700 shadow-sm">📄 عقود رسمية</span>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="https://wa.me/201110760081" class="bg-primary text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 text-center">
+                            <i class="fab fa-whatsapp ml-2"></i> تواصل فوراً
+                        </a>
+                        <a href="#services" class="bg-white border border-gray-200 text-primary font-bold py-3 px-8 rounded-xl hover:bg-gray-50 transition text-center">
+                            تصفح الخدمات
+                        </a>
                     </div>
                 </div>
-                <div class="md:w-1/2 w-full">
-                    <img src="https://emirates-projects.github.io/images/tax-card.jpg" alt="البطاقة الضريبية" class="w-full rounded-xl shadow-lg border-4 border-white transform hover:scale-105 transition duration-500">
-                    <p class="text-center text-xs text-gray-400 mt-2">وثيقة تسجيل ضريبي رسمية</p>
+
+                <!-- الصورة (منفصلة وواضحة) -->
+                <div class="w-full md:w-1/2 relative">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform rotate-1 hover:rotate-0 transition duration-500">
+                        <!-- تم استخدام الصورة الخاصة بك هنا -->
+                        <img src="https://emirates-projects.github.io/images/مشاريع%20الامارات.jpg" 
+                             alt="مشاريع الإمارات 2026" 
+                             class="w-full h-auto object-cover md:h-[500px]">
+                        
+                        <!-- بادج عائم -->
+                        <div class="absolute bottom-5 right-5 bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow-sm">
+                            <p class="font-bold text-sm flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                متواجدون الآن
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- خلفية زخرفية -->
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-50/50 to-transparent -z-10"></div>
+    </section>
+
+    <!-- الخدمات -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">خدمات تواكب السرعة</h2>
+                <p class="text-gray-500">حلول مصممة خصيصاً للسوق الإماراتي المتطور في عام 2026</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- كارد خدمة 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition border border-gray-100">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-6">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">متاجر الجيل القادم</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">بناء متاجر إلكترونية تدعم تقنيات الذكاء الاصطناعي والدفع السريع.</p>
+                </div>
+
+                <!-- كارد خدمة 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition border border-gray-100">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600 text-xl mb-6">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">تسويق بالنتائج</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">حملات سناب شات وتيك توك موجهة بدقة للجمهور الخليجي.</p>
+                </div>
+
+                <!-- كارد خدمة 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition border border-gray-100">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 text-xl mb-6">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">تطوير خاص</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">برمجة منصات عقارية وخدمية تناسب القوانين والتشريعات.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- الفوتر -->
-    <footer class="bg-gray-900 text-white py-8 text-center px-4">
-        <p class="text-gray-400 text-sm mb-2">&copy; 2024 جميع الحقوق محفوظة لمشاريع الإمارات.</p>
-        <div class="flex justify-center space-x-4 space-x-reverse text-lg">
-            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-tiktok"></i></a>
+    <!-- البطاقة الضريبية -->
+    <section class="py-16 bg-white border-t border-gray-100">
+        <div class="container mx-auto px-4 flex flex-col items-center">
+            <h2 class="text-2xl font-bold mb-8">توثيق رسمي</h2>
+            <div class="max-w-md w-full bg-gray-50 p-4 rounded-xl border border-gray-200">
+                <img src="https://emirates-projects.github.io/images/tax-card.jpg" alt="بطاقة ضريبية" class="w-full rounded shadow-sm">
+            </div>
         </div>
+    </section>
+
+    <footer class="bg-primary text-white py-6 text-center text-sm">
+        &copy; 2026 مشاريع الإمارات - جميع الحقوق محفوظة
     </footer>
 
-    <!-- زر واتساب العائم -->
-    <a href="https://wa.me/201110760081" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <a href="https://wa.me/201110760081" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- سكربت التحكم في القائمة -->
+    <script src="google-injector.js"></script>
     <script>
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // إغلاق القائمة عند الضغط على أي رابط
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
     </script>
-    
-    <!-- استدعاء ملف الخدمات والتحليلات المركزي -->
-    <script src="google-injector.js"></script>
-    
 </body>
 </html>
